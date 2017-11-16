@@ -73,7 +73,27 @@
 "use strict";
 
 
-console.log('Działa!');
+console.log('HUrrraa!');
+
+var Walker = function Walker() {
+  this.x = Math.floor(Math.random() * 10);
+  this.y = 0;
+  this.direction = 'bottom';
+};
+
+var Game = function Game() {
+  this.board = document.querySelectorAll('#board div');
+  this.walker = new Walker();
+  this.index = function (x, y) {
+    return x + y * 10;
+  };
+  this.showWalker = function () {
+    this.board[this.index(this.walker.x, this.walker.y)].classList.add('walker');
+  };
+};
+
+var game = new Game();
+game.showWalker();
 
 /***/ }),
 /* 1 */
