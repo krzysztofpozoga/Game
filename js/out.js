@@ -92,10 +92,17 @@ var Game = function Game() {
     this.visibleWalker = document.querySelector('.walker');
     this.visibleWalker.classList.remove('walker');
   };
+  this.hitTheWall = function () {
+    if (this.walker.y > 8) {
+      clearInterval(this.idSetInterval);
+      this.hideWalker();
+    }
+  };
   this.moveWalker = function () {
     this.hideWalker();
     this.walker.y = this.walker.y + 1;
     this.showWalker();
+    this.hitTheWall();
   };
   this.startGame = function () {
     var self = this;
