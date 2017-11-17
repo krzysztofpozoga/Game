@@ -1,11 +1,14 @@
+let i = 0;
 let Walker = function(){
   this.x = Math.floor(Math.random() * 10);
   this.y = 0;
   this.killMe = function(){
-    this.visibleWalker = document.querySelector('.walker');
-    this.visibleWalker.classList.remove('walker');
     game.removeInterval();
+    this.visibleWalker = document.getElementById(this.id);
+    this.visibleWalker.classList.remove('walker');
+    this.visibleWalker.removeAttribute('id');
   }
+  this.id = i;
 }
 
 let Game = function(){
@@ -16,11 +19,13 @@ let Game = function(){
   }
   this.showWalker = function(){
     this.board[this.index(this.walker.x,this.walker.y) ].classList.add('walker');
+    this.board[this.index(this.walker.x,this.walker.y) ].setAttribute('id' ,this.walker.id);
     this.killTheWalker();
   }
   this.hideWalker = function(){
-    this.visibleWalker = document.querySelector('.walker');
-    this.visibleWalker.classList.remove('walker');
+    this.visible = document.getElementById(this.walker.id);
+    this.visible.classList.remove('walker');
+    this.visible.removeAttribute('id');
     this.board[this.index(this.walker.x,this.walker.y)].removeEventListener('click', this.walker.killMe)
   }
   this.hitTheWall = function(){
@@ -53,6 +58,9 @@ let Game = function(){
   }
 }
 
-let game = new Game();
-game.showWalker();
-game.startGame();
+let walkersInterval = setInterval(function(){
+  i++;
+  let game = new Game();
+  game.showWalker();
+  game.startGame();
+}, 2000)
