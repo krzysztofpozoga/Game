@@ -77,7 +77,9 @@ var Walker = function Walker() {
   this.x = Math.floor(Math.random() * 10);
   this.y = 0;
   this.killMe = function () {
-    console.log('ssss');
+    this.visibleWalker = document.querySelector('.walker');
+    this.visibleWalker.classList.remove('walker');
+    game.removeInterval();
   };
 };
 
@@ -98,7 +100,7 @@ var Game = function Game() {
   };
   this.hitTheWall = function () {
     if (this.walker.y > 8) {
-      clearInterval(this.idSetInterval);
+      this.removeInterval();
       this.hideWalker();
     }
   };
@@ -113,6 +115,11 @@ var Game = function Game() {
     this.board[this.index(this.walker.x, this.walker.y)].addEventListener('click', this.walker.killMe);
   };
 
+  this.removeInterval = function () {
+    clearInterval(this.idSetInterval);
+    this.board[this.index(this.walker.x, this.walker.y)].removeEventListener('click', this.walker.killMe);
+  };
+
   this.startGame = function () {
     var self = this;
     self.idSetInterval = setInterval(function () {
@@ -124,13 +131,6 @@ var Game = function Game() {
 var game = new Game();
 game.showWalker();
 game.startGame();
-// let allDivs = document.querySelectorAll('div');
-// for(let i = 0; i < allDivs.length; i++){
-//   allDivs[i].addEventListener('click', function(){
-//   game.killTheWalker();
-//   });
-// }
-// game.killTheWalker();
 
 /***/ }),
 /* 1 */
