@@ -128,21 +128,37 @@ var Game = function Game() {
 
   this.startGame = function () {
     var self = _this;
-    var number = parseInt(Math.floor(Math.random() * 6 + 5)) + '00';
+    var number = parseInt(Math.floor(Math.random() * 4 + 7)) + '00';
     var sec = Number(number);
-    console.log(sec);
+    // console.log(sec);
     _this.idSetInterval = setInterval(function () {
       _this.moveWalker();
-    }, sec);
+    }, 1000);
   };
 };
 
-var walkersInterval = setInterval(function () {
-  i++;
-  var game = new Game();
-  game.showWalker();
-  game.startGame();
-}, 2000);
+var Round = function Round() {
+  var _this2 = this;
+
+  this.walkersInterval = setInterval(function () {
+    if (i > 9) {
+      console.log('Koniec rundy!!!');
+      clearInterval(_this2.walkersInterval);
+    } else {
+      i++;
+      var game = new Game();
+      game.showWalker();
+      game.startGame();
+    }
+  }, 2000);
+};
+var round = new Round();
+// let walkersInterval = setInterval(()=>{
+//   i++;
+//   let game = new Game();
+//   game.showWalker();
+//   game.startGame();
+// }, 2000)
 
 /***/ }),
 /* 1 */

@@ -51,18 +51,32 @@ let Game = function(){
 
   this.startGame = () =>{
     let self = this;
-    let number = parseInt(Math.floor((Math.random() * 6) + 5))+'00';
+    let number = parseInt(Math.floor((Math.random() * 4) + 7))+'00';
     let sec = Number(number)
-    console.log(sec);
+    // console.log(sec);
     this.idSetInterval = setInterval(()=>{
       this.moveWalker();
-    }, sec);
+    }, 1000);
   }
 }
 
-let walkersInterval = setInterval(()=>{
-  i++;
-  let game = new Game();
-  game.showWalker();
-  game.startGame();
-}, 2000)
+let Round = function(){
+  this.walkersInterval = setInterval(()=>{
+    if (i>9) {
+      console.log('Koniec rundy!!!');
+      clearInterval(this.walkersInterval);
+    } else {
+      i++;
+      let game = new Game();
+      game.showWalker();
+      game.startGame();
+    }
+  }, 2000)
+}
+let round = new Round();
+// let walkersInterval = setInterval(()=>{
+//   i++;
+//   let game = new Game();
+//   game.showWalker();
+//   game.startGame();
+// }, 2000)
