@@ -77,58 +77,59 @@ var i = 0;
 var Walker = function Walker() {
   this.x = Math.floor(Math.random() * 10);
   this.y = 0;
-  this.killMe = function () {
-    game.removeInterval();
-    this.visibleWalker = document.getElementById(this.id);
-    this.visibleWalker.classList.remove('walker');
-    this.visibleWalker.removeAttribute('id');
-  };
-  this.id = i;
 };
 
 var Game = function Game() {
+  var _this = this;
+
+  this.id = i;
   this.board = document.querySelectorAll('#board div');
   this.walker = new Walker();
   this.index = function (x, y) {
     return x + y * 10;
   };
   this.showWalker = function () {
-    this.board[this.index(this.walker.x, this.walker.y)].classList.add('walker');
-    this.board[this.index(this.walker.x, this.walker.y)].setAttribute('id', this.walker.id);
-    this.killTheWalker();
+    _this.board[_this.index(_this.walker.x, _this.walker.y)].classList.add('walker');
+    _this.board[_this.index(_this.walker.x, _this.walker.y)].setAttribute('id', _this.id);
+    _this.killTheWalker();
   };
   this.hideWalker = function () {
-    this.visible = document.getElementById(this.walker.id);
-    this.visible.classList.remove('walker');
-    this.visible.removeAttribute('id');
-    this.board[this.index(this.walker.x, this.walker.y)].removeEventListener('click', this.walker.killMe);
+    _this.visible = document.getElementById(_this.id);
+    _this.visible.classList.remove('walker');
+    _this.visible.removeAttribute('id');
+    _this.board[_this.index(_this.walker.x, _this.walker.y)].removeEventListener('click', _this.killMe);
   };
   this.hitTheWall = function () {
-    if (this.walker.y > 8) {
-      this.removeInterval();
-      this.hideWalker();
+    if (_this.walker.y > 8) {
+      _this.removeInterval();
+      _this.hideWalker();
     }
   };
   this.moveWalker = function () {
-    this.hideWalker();
-    this.walker.y = this.walker.y + 1;
-    this.showWalker();
-    this.hitTheWall();
+    _this.hideWalker();
+    _this.walker.y = _this.walker.y + 1;
+    _this.showWalker();
+    _this.hitTheWall();
+  };
+
+  this.killMe = function () {
+    _this.removeInterval();
+    _this.hideWalker();
   };
 
   this.killTheWalker = function () {
-    this.board[this.index(this.walker.x, this.walker.y)].addEventListener('click', this.walker.killMe);
+    _this.board[_this.index(_this.walker.x, _this.walker.y)].addEventListener('click', _this.killMe);
   };
 
   this.removeInterval = function () {
-    clearInterval(this.idSetInterval);
-    this.board[this.index(this.walker.x, this.walker.y)].removeEventListener('click', this.walker.killMe);
+    clearInterval(_this.idSetInterval);
+    _this.board[_this.index(_this.walker.x, _this.walker.y)].removeEventListener('click', _this.killMe);
   };
 
   this.startGame = function () {
-    var self = this;
-    self.idSetInterval = setInterval(function () {
-      self.moveWalker();
+    var self = _this;
+    _this.idSetInterval = setInterval(function () {
+      _this.moveWalker();
     }, 1000);
   };
 };

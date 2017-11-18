@@ -2,63 +2,62 @@ let i = 0;
 let Walker = function(){
   this.x = Math.floor(Math.random() * 10);
   this.y = 0;
-  this.killMe = function(){
-    game.removeInterval();
-    this.visibleWalker = document.getElementById(this.id);
-    this.visibleWalker.classList.remove('walker');
-    this.visibleWalker.removeAttribute('id');
-  }
-  this.id = i;
 }
 
 let Game = function(){
+  this.id = i;
   this.board = document.querySelectorAll('#board div');
   this.walker = new Walker();
-  this.index = function(x,y) {
+  this.index = (x,y) => {
     return x + (y * 10);
   }
-  this.showWalker = function(){
+  this.showWalker = () =>{
     this.board[this.index(this.walker.x,this.walker.y) ].classList.add('walker');
-    this.board[this.index(this.walker.x,this.walker.y) ].setAttribute('id' ,this.walker.id);
+    this.board[this.index(this.walker.x,this.walker.y) ].setAttribute('id' ,this.id);
     this.killTheWalker();
   }
-  this.hideWalker = function(){
-    this.visible = document.getElementById(this.walker.id);
+  this.hideWalker = () =>{
+    this.visible = document.getElementById(this.id);
     this.visible.classList.remove('walker');
     this.visible.removeAttribute('id');
-    this.board[this.index(this.walker.x,this.walker.y)].removeEventListener('click', this.walker.killMe)
+    this.board[this.index(this.walker.x,this.walker.y)].removeEventListener('click', this.killMe);
   }
-  this.hitTheWall = function(){
+  this.hitTheWall = () =>{
     if (this.walker.y > 8) {
       this.removeInterval();
       this.hideWalker();
     }
   }
-  this.moveWalker = function(){
+  this.moveWalker = () =>{
     this.hideWalker();
     this.walker.y = this.walker.y + 1;
     this.showWalker();
     this.hitTheWall();
   }
 
-  this.killTheWalker = function(){
-    this.board[this.index(this.walker.x,this.walker.y)].addEventListener('click', this.walker.killMe)
+  this.killMe = () =>{
+    this.removeInterval();
+    this.hideWalker();
   }
 
-  this.removeInterval = function(){
+  this.killTheWalker = () =>{
+    this.board[this.index(this.walker.x,this.walker.y)].addEventListener('click', this.killMe)
+  }
+
+  this.removeInterval = () =>{
     clearInterval(this.idSetInterval);
-    this.board[this.index(this.walker.x,this.walker.y)].removeEventListener('click', this.walker.killMe)
+    this.board[this.index(this.walker.x,this.walker.y)].removeEventListener('click', this.killMe)
   }
 
-  this.startGame = function(){
+  this.startGame = () =>{
     let self = this;
-    self.idSetInterval = setInterval(function(){
-      self.moveWalker();
+    this.idSetInterval = setInterval(()=>{
+      this.moveWalker();
     }, 1000);
   }
 }
 
-let walkersInterval = setInterval(function(){
+let walkersInterval = setInterval(()=>{
   i++;
   let game = new Game();
   game.showWalker();
