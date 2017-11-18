@@ -128,9 +128,12 @@ var Game = function Game() {
 
   this.startGame = function () {
     var self = _this;
+    var number = parseInt(Math.floor(Math.random() * 6 + 5)) + '00';
+    var sec = Number(number);
+    console.log(sec);
     _this.idSetInterval = setInterval(function () {
       _this.moveWalker();
-    }, 1000);
+    }, sec);
   };
 };
 

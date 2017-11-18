@@ -51,9 +51,12 @@ let Game = function(){
 
   this.startGame = () =>{
     let self = this;
+    let number = parseInt(Math.floor((Math.random() * 6) + 5))+'00';
+    let sec = Number(number)
+    console.log(sec);
     this.idSetInterval = setInterval(()=>{
       this.moveWalker();
-    }, 1000);
+    }, sec);
   }
 }
 
