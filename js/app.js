@@ -73,10 +73,15 @@ let Round = function(){
     }
   }, 2000)
 }
-let round = new Round();
-// let walkersInterval = setInterval(()=>{
-//   i++;
-//   let game = new Game();
-//   game.showWalker();
-//   game.startGame();
-// }, 2000)
+
+let Start = function(){
+  this.startButton = document.getElementById('start');
+  this.boardSection = document.getElementById('board');
+  this.start = () =>{
+    this.startButton.style.display = 'none';
+    this.boardSection.style.display = 'flex';
+    let round = new Round();
+  }
+  this.startButton.addEventListener('click', this.start)
+}
+let runGame = new Start();

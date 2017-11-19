@@ -152,13 +152,20 @@ var Round = function Round() {
     }
   }, 2000);
 };
-var round = new Round();
-// let walkersInterval = setInterval(()=>{
-//   i++;
-//   let game = new Game();
-//   game.showWalker();
-//   game.startGame();
-// }, 2000)
+
+var Start = function Start() {
+  var _this3 = this;
+
+  this.startButton = document.getElementById('start');
+  this.boardSection = document.getElementById('board');
+  this.start = function () {
+    _this3.startButton.style.display = 'none';
+    _this3.boardSection.style.display = 'flex';
+    var round = new Round();
+  };
+  this.startButton.addEventListener('click', this.start);
+};
+var runGame = new Start();
 
 /***/ }),
 /* 1 */
