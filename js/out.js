@@ -93,10 +93,17 @@ var Game = function Game() {
   };
   this.showWalker = function () {
     if (_this.board[_this.index(_this.walker.x, _this.walker.y)].hasAttribute('id')) {
-      _this.walker.x = _this.walker.x + 1;
-      _this.board[_this.index(_this.walker.x, _this.walker.y)].classList.add('walker');
-      _this.board[_this.index(_this.walker.x, _this.walker.y)].setAttribute('id', _this.id);
-      _this.killTheWalker();
+      if (_this.walker.x === 9) {
+        _this.walker.x = _this.walker.x - 1;
+        _this.board[_this.index(_this.walker.x, _this.walker.y)].classList.add('walker');
+        _this.board[_this.index(_this.walker.x, _this.walker.y)].setAttribute('id', _this.id);
+        _this.killTheWalker();
+      } else {
+        _this.walker.x = _this.walker.x + 1;
+        _this.board[_this.index(_this.walker.x, _this.walker.y)].classList.add('walker');
+        _this.board[_this.index(_this.walker.x, _this.walker.y)].setAttribute('id', _this.id);
+        _this.killTheWalker();
+      }
     } else {
       _this.board[_this.index(_this.walker.x, _this.walker.y)].classList.add('walker');
       _this.board[_this.index(_this.walker.x, _this.walker.y)].setAttribute('id', _this.id);

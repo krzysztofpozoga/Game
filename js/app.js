@@ -16,10 +16,17 @@ let Game = function(){
   }
   this.showWalker = () =>{
     if (this.board[this.index(this.walker.x,this.walker.y) ].hasAttribute('id')) {
-      this.walker.x = this.walker.x + 1;
-      this.board[this.index(this.walker.x,this.walker.y) ].classList.add('walker');
-      this.board[this.index(this.walker.x,this.walker.y) ].setAttribute('id' ,this.id);
-      this.killTheWalker();
+      if (this.walker.x === 9) {
+        this.walker.x = this.walker.x-1;
+        this.board[this.index(this.walker.x,this.walker.y) ].classList.add('walker');
+        this.board[this.index(this.walker.x,this.walker.y) ].setAttribute('id' ,this.id);
+        this.killTheWalker();
+      } else {
+        this.walker.x = this.walker.x+1;
+        this.board[this.index(this.walker.x,this.walker.y) ].classList.add('walker');
+        this.board[this.index(this.walker.x,this.walker.y) ].setAttribute('id' ,this.id);
+        this.killTheWalker();
+      }
     } else {
       this.board[this.index(this.walker.x,this.walker.y) ].classList.add('walker');
       this.board[this.index(this.walker.x,this.walker.y) ].setAttribute('id' ,this.id);
