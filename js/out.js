@@ -89,9 +89,16 @@ var Game = function Game() {
     return x + y * 10;
   };
   this.showWalker = function () {
-    _this.board[_this.index(_this.walker.x, _this.walker.y)].classList.add('walker');
-    _this.board[_this.index(_this.walker.x, _this.walker.y)].setAttribute('id', _this.id);
-    _this.killTheWalker();
+    if (_this.board[_this.index(_this.walker.x, _this.walker.y)].hasAttribute('id')) {
+      _this.walker.x = _this.walker.x + 1;
+      _this.board[_this.index(_this.walker.x, _this.walker.y)].classList.add('walker');
+      _this.board[_this.index(_this.walker.x, _this.walker.y)].setAttribute('id', _this.id);
+      _this.killTheWalker();
+    } else {
+      _this.board[_this.index(_this.walker.x, _this.walker.y)].classList.add('walker');
+      _this.board[_this.index(_this.walker.x, _this.walker.y)].setAttribute('id', _this.id);
+      _this.killTheWalker();
+    }
   };
   this.hideWalker = function () {
     _this.visible = document.getElementById(_this.id);
@@ -130,10 +137,9 @@ var Game = function Game() {
     var self = _this;
     var number = parseInt(Math.floor(Math.random() * 4 + 7)) + '00';
     var sec = Number(number);
-    // console.log(sec);
     _this.idSetInterval = setInterval(function () {
       _this.moveWalker();
-    }, 1000);
+    }, sec);
   };
 };
 

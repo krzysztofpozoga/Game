@@ -12,9 +12,17 @@ let Game = function(){
     return x + (y * 10);
   }
   this.showWalker = () =>{
-    this.board[this.index(this.walker.x,this.walker.y) ].classList.add('walker');
-    this.board[this.index(this.walker.x,this.walker.y) ].setAttribute('id' ,this.id);
-    this.killTheWalker();
+    if (this.board[this.index(this.walker.x,this.walker.y) ].hasAttribute('id')) {
+      this.walker.x = this.walker.x + 1;
+      this.board[this.index(this.walker.x,this.walker.y) ].classList.add('walker');
+      this.board[this.index(this.walker.x,this.walker.y) ].setAttribute('id' ,this.id);
+      this.killTheWalker();
+    } else {
+      this.board[this.index(this.walker.x,this.walker.y) ].classList.add('walker');
+      this.board[this.index(this.walker.x,this.walker.y) ].setAttribute('id' ,this.id);
+      this.killTheWalker();
+    }
+
   }
   this.hideWalker = () =>{
     this.visible = document.getElementById(this.id);
@@ -53,10 +61,9 @@ let Game = function(){
     let self = this;
     let number = parseInt(Math.floor((Math.random() * 4) + 7))+'00';
     let sec = Number(number)
-    // console.log(sec);
     this.idSetInterval = setInterval(()=>{
       this.moveWalker();
-    }, 1000);
+    }, sec);
   }
 }
 
