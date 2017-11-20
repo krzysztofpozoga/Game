@@ -1,4 +1,6 @@
 let i = 0;
+let numOfWalkers = 2;
+let array = [];
 let Walker = function(){
   this.x = Math.floor(Math.random() * 10);
   this.y = 0;
@@ -7,6 +9,7 @@ let Walker = function(){
 let Game = function(){
   this.id = i;
   this.board = document.querySelectorAll('#board div');
+  this.nextRoundButton = document.getElementById('next');
   this.walker = new Walker();
   this.index = (x,y) => {
     return x + (y * 10);
@@ -44,8 +47,16 @@ let Game = function(){
   }
 
   this.killMe = () =>{
-    this.removeInterval();
-    this.hideWalker();
+    array.push(this.walker);
+    if (array.length < numOfWalkers+1) {
+      this.removeInterval();
+      this.hideWalker();
+    } else {
+      this.removeInterval();
+      this.hideWalker();
+      this.nextRoundButton.style.display = 'flex';
+    }
+
   }
 
   this.killTheWalker = () =>{
@@ -69,8 +80,7 @@ let Game = function(){
 
 let Round = function(){
   this.walkersInterval = setInterval(()=>{
-    if (i>9) {
-      console.log('Koniec rundy!!!');
+    if (i>numOfWalkers) {
       clearInterval(this.walkersInterval);
     } else {
       i++;
@@ -89,6 +99,19 @@ let Start = function(){
     this.boardSection.style.display = 'flex';
     let round = new Round();
   }
-  this.startButton.addEventListener('click', this.start)
+  this.startButton.addEventListener('click', this.start);
 }
-let runGame = new Start();
+let start = new Start();
+
+let NextRound = function(){
+  this.nextButton = document.getElementById('next');
+  this.nextRound = () => {
+    i = 0;
+    array = [];
+    this.nextButton.style.display = 'none';
+    let round = new Round();
+  }
+  this.nextButton.addEventListener('click', this.nextRound);
+}
+
+let nextRound = new NextRound();

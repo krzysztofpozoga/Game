@@ -74,6 +74,8 @@
 
 
 var i = 0;
+var numOfWalkers = 2;
+var array = [];
 var Walker = function Walker() {
   this.x = Math.floor(Math.random() * 10);
   this.y = 0;
@@ -84,6 +86,7 @@ var Game = function Game() {
 
   this.id = i;
   this.board = document.querySelectorAll('#board div');
+  this.nextRoundButton = document.getElementById('next');
   this.walker = new Walker();
   this.index = function (x, y) {
     return x + y * 10;
@@ -120,8 +123,15 @@ var Game = function Game() {
   };
 
   this.killMe = function () {
-    _this.removeInterval();
-    _this.hideWalker();
+    array.push(_this.walker);
+    if (array.length < numOfWalkers + 1) {
+      _this.removeInterval();
+      _this.hideWalker();
+    } else {
+      _this.removeInterval();
+      _this.hideWalker();
+      _this.nextRoundButton.style.display = 'flex';
+    }
   };
 
   this.killTheWalker = function () {
@@ -147,8 +157,7 @@ var Round = function Round() {
   var _this2 = this;
 
   this.walkersInterval = setInterval(function () {
-    if (i > 9) {
-      console.log('Koniec rundy!!!');
+    if (i > numOfWalkers) {
       clearInterval(_this2.walkersInterval);
     } else {
       i++;
@@ -171,7 +180,22 @@ var Start = function Start() {
   };
   this.startButton.addEventListener('click', this.start);
 };
-var runGame = new Start();
+var start = new Start();
+
+var NextRound = function NextRound() {
+  var _this4 = this;
+
+  this.nextButton = document.getElementById('next');
+  this.nextRound = function () {
+    i = 0;
+    array = [];
+    _this4.nextButton.style.display = 'none';
+    var round = new Round();
+  };
+  this.nextButton.addEventListener('click', this.nextRound);
+};
+
+var nextRound = new NextRound();
 
 /***/ }),
 /* 1 */
