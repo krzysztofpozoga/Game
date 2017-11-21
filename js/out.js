@@ -118,8 +118,12 @@ var Game = function Game() {
   };
   this.hitTheWall = function () {
     if (_this.walker.y > 8) {
+      array.push(_this.walker);
       _this.removeInterval();
       _this.hideWalker();
+      if (array.length > numOfWalkers) {
+        _this.nextRoundButton.style.display = 'flex';
+      }
     }
   };
   this.moveWalker = function () {

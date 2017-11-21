@@ -42,8 +42,12 @@ let Game = function(){
   }
   this.hitTheWall = () =>{
     if (this.walker.y > 8) {
+      array.push(this.walker);
       this.removeInterval();
       this.hideWalker();
+      if (array.length > numOfWalkers) {
+        this.nextRoundButton.style.display = 'flex';
+      }
     }
   }
   this.moveWalker = () =>{
