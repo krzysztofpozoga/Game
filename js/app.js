@@ -1,6 +1,8 @@
 let i = 0;
-let numOfWalkers = 2;
+let numOfWalkers = 9;
 let array = [];
+let roundCounter = 1;
+
 let Walker = function(){
   this.x = Math.floor(Math.random() * 10);
   this.y = 0;
@@ -80,12 +82,39 @@ let Game = function(){
   }
 
   this.startGame = () =>{
+    let number = parseInt(Math.floor((Math.random() * 6) + 10))+'00';
+    let sec = Number(number);
     let self = this;
-    let number = parseInt(Math.floor((Math.random() * 4) + 7))+'00';
-    let sec = Number(number)
-    this.idSetInterval = setInterval(()=>{
-      this.moveWalker();
-    }, sec);
+    if (roundCounter === 1) {
+      this.idSetInterval = setInterval(()=>{
+        this.moveWalker();
+      }, sec);
+    } else if (roundCounter > 1 && roundCounter < 6) {
+      let number = parseInt(Math.floor((Math.random() * 6) + 10))+'00';
+      sec = Number(number) - (50*(roundCounter-1));
+      this.idSetInterval = setInterval(()=>{
+        this.moveWalker();
+      }, sec);
+    } else if (roundCounter === 6) {
+      number = parseInt(Math.floor((Math.random() * 4) + 7))+'00';
+      sec = Number(number);
+      this.idSetInterval = setInterval(()=>{
+        this.moveWalker();
+      }, sec);
+    } else if (roundCounter > 6 && roundCounter < 15) {
+      number = parseInt(Math.floor((Math.random() * 4) + 7))+'00';
+      sec = Number(number) - (50*(roundCounter-6));
+      this.idSetInterval = setInterval(()=>{
+        this.moveWalker();
+      }, sec);
+    } else if (roundCounter === 15) {
+      console.log(roundCounter);
+      number = parseInt(Math.floor((Math.random() * 4) + 2))+'00';
+      sec = Number(number);
+      this.idSetInterval = setInterval(()=>{
+        this.moveWalker();
+      }, sec);
+    }
   }
 }
 
@@ -99,7 +128,7 @@ let Round = function(){
       game.showWalker();
       game.startGame();
     }
-  }, 2000)
+  }, 1000)
 }
 
 let Start = function(){
@@ -117,6 +146,7 @@ let start = new Start();
 let NextRound = function(){
   this.nextButton = document.getElementById('next');
   this.nextRound = () => {
+    roundCounter = roundCounter+1;
     i = 0;
     array = [];
     this.nextButton.style.display = 'none';
