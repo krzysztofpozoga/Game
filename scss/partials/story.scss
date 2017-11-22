@@ -1,0 +1,45 @@
+#story {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: black;
+  .slide {
+    height: 100%;
+    width:70%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    animation-name: slideShow;
+    animation-duration: 40s;
+    animation-fill-mode: forwards;
+  }
+}
+
+@keyframes slideShow {
+  0% {
+    background-image: url(../images/crops.jpg);
+  }
+  20% {
+    background-image: url(../images/black.jpg);
+  }
+  25% {
+    background-image: url(../images/fenceAttack.jpg);
+  }
+  45% {
+    background-image: url(../images/black.jpg);
+  }
+  50% {
+    background-image: url(../images/zombieFence.jpg);
+  }
+  70% {
+    background-image: url(../images/black.jpg);
+  }
+  75% {
+    background-image: url(../images/killThemAll.jpg);
+  }
+  100% {
+    background-image: url(../images/killThemAll.jpg);
+  }
+}
