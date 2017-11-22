@@ -26,8 +26,20 @@
   }
 }
 
+@keyframes hidding {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 #mainPage {
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
@@ -36,6 +48,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+
   h1 {
     color: silver;
     font-family: 'Nosifer';
@@ -49,4 +62,9 @@
       animation-duration: 4s;
       animation-fill-mode: forwards;
   }
+}
+.hidding {
+  animation-name: hidding;
+  animation-duration: 4s;
+  animation-fill-mode: forwards;
 }

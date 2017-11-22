@@ -240,14 +240,22 @@ var nextRound = new NextRound();
 
 ///////////MAIN Page///////////
 
+var StoryPage = function StoryPage() {
+  this.page = document.querySelector('#story');
+};
+
 var MainPage = function MainPage() {
   var _this5 = this;
 
+  this.story = new StoryPage();
+  this.main = document.querySelector('#mainPage');
   this.title = document.querySelector('#mainPage h1');
   this.beginning = function () {
     _this5.title.classList.add('bloodEffect');
+    _this5.main.classList.add('hidding');
     var timeout = setTimeout(function () {
-      console.log('Start');
+      _this5.main.style.display = 'none';
+      _this5.story.page.style.display = 'flex';
     }, 5000);
   };
   this.title.addEventListener('click', this.beginning);

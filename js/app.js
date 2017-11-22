@@ -160,13 +160,22 @@ let nextRound = new NextRound();
 
 ///////////MAIN Page///////////
 
+let StoryPage = function(){
+  this.page = document.querySelector('#story');
+}
+
 let MainPage = function(){
+  this.story = new StoryPage();
+  this.main = document.querySelector('#mainPage');
   this.title = document.querySelector('#mainPage h1');
   this.beginning = () => {
     this.title.classList.add('bloodEffect');
-    let	timeout	=	setTimeout(function	(){
-		console.log('Start');
-    },	5000);    
+    this.main.classList.add('hidding');
+    let	timeout	=	setTimeout(() =>{
+      this.main.style.display= 'none';
+      this.story.page.style.display = 'flex';
+    },	5000);
+
   }
   this.title.addEventListener('click', this.beginning);
 }

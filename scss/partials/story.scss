@@ -1,5 +1,5 @@
 #story {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   height: 100vh;
@@ -14,29 +14,33 @@
     animation-name: slideShow;
     animation-duration: 40s;
     animation-fill-mode: forwards;
+    animation-delay: 1s;
   }
 }
 
 @keyframes slideShow {
   0% {
+    background-image: url(../images/black.jpg);
+  }
+  5% {
     background-image: url(../images/crops.jpg);
   }
-  20% {
+  25% {
     background-image: url(../images/black.jpg);
   }
-  25% {
+  30% {
     background-image: url(../images/fenceAttack.jpg);
   }
-  45% {
+  50% {
     background-image: url(../images/black.jpg);
   }
-  50% {
+  55% {
     background-image: url(../images/zombieFence.jpg);
   }
-  70% {
+  75% {
     background-image: url(../images/black.jpg);
   }
-  75% {
+  80% {
     background-image: url(../images/killThemAll.jpg);
   }
   100% {
