@@ -238,6 +238,23 @@ var NextRound = function NextRound() {
 
 var nextRound = new NextRound();
 
+///////////MAIN Page///////////
+
+var MainPage = function MainPage() {
+  var _this5 = this;
+
+  this.title = document.querySelector('#mainPage h1');
+  this.beginning = function () {
+    _this5.title.classList.add('bloodEffect');
+    var timeout = setTimeout(function () {
+      console.log('Start');
+    }, 5000);
+  };
+  this.title.addEventListener('click', this.beginning);
+};
+
+var mainPage = new MainPage();
+
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {

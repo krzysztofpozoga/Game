@@ -156,3 +156,19 @@ let NextRound = function(){
 }
 
 let nextRound = new NextRound();
+
+
+///////////MAIN Page///////////
+
+let MainPage = function(){
+  this.title = document.querySelector('#mainPage h1');
+  this.beginning = () => {
+    this.title.classList.add('bloodEffect');
+    let	timeout	=	setTimeout(function	(){
+		console.log('Start');
+    },	5000);    
+  }
+  this.title.addEventListener('click', this.beginning);
+}
+
+let mainPage = new MainPage();

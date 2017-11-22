@@ -42,11 +42,11 @@
     font-size: 3em;
     letter-spacing: 0.2em;
     text-shadow: 2px 0 0 red, -2px 0 0 red, 0 2px 0 red, 0 -2px 0 red, 2px 2px red, -2px -2px 0 red, 2px -2px 0 red, -2px 2px 0 red;
-    &:hover {
-        color:silver;
-        animation-name: dripping;
-        animation-duration: 4s;
-        animation-fill-mode: forwards;
-    }
+  }
+  .bloodEffect {
+      color:silver;
+      animation-name: dripping;
+      animation-duration: 4s;
+      animation-fill-mode: forwards;
   }
 }
