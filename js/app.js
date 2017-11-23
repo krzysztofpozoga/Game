@@ -2,6 +2,9 @@ let i = 0;
 let numOfWalkers = 9;
 let array = [];
 let roundCounter = 1;
+let progressBar = document.querySelector('.progressBar .hit');
+let progress = 100;
+progressBar.style.width = parseInt(progress)+"%";
 
 let Walker = function(){
   this.x = Math.floor(Math.random() * 10);
@@ -47,6 +50,8 @@ let Game = function(){
       array.push(this.walker);
       this.removeInterval();
       this.hideWalker();
+      progress = progress - 10;
+      progressBar.style.width = parseInt(progress)+"%";
       if (array.length > numOfWalkers) {
         this.nextRoundButton.style.display = 'flex';
       }

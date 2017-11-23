@@ -77,6 +77,9 @@ var i = 0;
 var numOfWalkers = 9;
 var array = [];
 var roundCounter = 1;
+var progressBar = document.querySelector('.progressBar .hit');
+var progress = 100;
+progressBar.style.width = parseInt(progress) + "%";
 
 var Walker = function Walker() {
   this.x = Math.floor(Math.random() * 10);
@@ -123,6 +126,8 @@ var Game = function Game() {
       array.push(_this.walker);
       _this.removeInterval();
       _this.hideWalker();
+      progress = progress - 10;
+      progressBar.style.width = parseInt(progress) + "%";
       if (array.length > numOfWalkers) {
         _this.nextRoundButton.style.display = 'flex';
       }
