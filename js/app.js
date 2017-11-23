@@ -55,6 +55,15 @@ let Game = function(){
       this.hideWalker();
       progress = progress - 10;
       progressBar.style.width = parseInt(progress)+"%";
+      if (progress <=100 && progress >=80) {
+        progressBar.style.backgroundColor = "green";
+      } else if (progress <80 && progress >=60) {
+        progressBar.style.backgroundColor = "yellow";
+      } else if (progress <60 && progress >=40) {
+        progressBar.style.backgroundColor = "orange";
+      } else if (progress <40) {
+        progressBar.style.backgroundColor = "red";
+      }
       if (progress === 0) {
         this.boardPage.style.display = 'none';
       }
