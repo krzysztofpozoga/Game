@@ -92,6 +92,7 @@ var Game = function Game() {
   this.id = i;
   this.zombies = ['zombieOne', 'zombieTwo', 'zombieThree'];
   this.randomZombie = Math.round(Math.random() * 2);
+  this.boardPage = document.querySelector('#board');
   this.board = document.querySelectorAll('#board div');
   this.nextRoundButton = document.getElementById('next');
   this.walker = new Walker();
@@ -102,24 +103,24 @@ var Game = function Game() {
     if (_this.board[_this.index(_this.walker.x, _this.walker.y)].hasAttribute('id')) {
       if (_this.walker.x === 9) {
         _this.walker.x = _this.walker.x - 1;
-        _this.board[_this.index(_this.walker.x, _this.walker.y)].classList.add(_this.zombies[_this.randomZombie]);
+        _this.board[_this.index(_this.walker.x, _this.walker.y)].classList.add(_this.zombies[_this.randomZombie], 'all');
         _this.board[_this.index(_this.walker.x, _this.walker.y)].setAttribute('id', _this.id);
         _this.killTheWalker();
       } else {
         _this.walker.x = _this.walker.x + 1;
-        _this.board[_this.index(_this.walker.x, _this.walker.y)].classList.add(_this.zombies[_this.randomZombie]);
+        _this.board[_this.index(_this.walker.x, _this.walker.y)].classList.add(_this.zombies[_this.randomZombie], 'all');
         _this.board[_this.index(_this.walker.x, _this.walker.y)].setAttribute('id', _this.id);
         _this.killTheWalker();
       }
     } else {
-      _this.board[_this.index(_this.walker.x, _this.walker.y)].classList.add(_this.zombies[_this.randomZombie]);
+      _this.board[_this.index(_this.walker.x, _this.walker.y)].classList.add(_this.zombies[_this.randomZombie], 'all');
       _this.board[_this.index(_this.walker.x, _this.walker.y)].setAttribute('id', _this.id);
       _this.killTheWalker();
     }
   };
   this.hideWalker = function () {
     _this.visible = document.getElementById(_this.id);
-    _this.visible.classList.remove(_this.zombies[_this.randomZombie]);
+    _this.visible.classList.remove(_this.zombies[_this.randomZombie], 'all');
     _this.visible.removeAttribute('id');
     _this.board[_this.index(_this.walker.x, _this.walker.y)].removeEventListener('click', _this.killMe);
   };
@@ -130,6 +131,9 @@ var Game = function Game() {
       _this.hideWalker();
       progress = progress - 10;
       progressBar.style.width = parseInt(progress) + "%";
+      if (progress === 0) {
+        _this.boardPage.style.display = 'none';
+      }
       if (array.length > numOfWalkers) {
         _this.nextRoundButton.style.display = 'flex';
       }

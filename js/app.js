@@ -15,6 +15,7 @@ let Game = function(){
   this.id = i;
   this.zombies = ['zombieOne', 'zombieTwo', 'zombieThree'];
   this.randomZombie = Math.round(Math.random() * 2);
+  this.boardPage = document.querySelector('#board');
   this.board = document.querySelectorAll('#board div');
   this.nextRoundButton = document.getElementById('next');
   this.walker = new Walker();
@@ -25,17 +26,17 @@ let Game = function(){
     if (this.board[this.index(this.walker.x,this.walker.y) ].hasAttribute('id')) {
       if (this.walker.x === 9) {
         this.walker.x = this.walker.x-1;
-        this.board[this.index(this.walker.x,this.walker.y) ].classList.add(this.zombies[this.randomZombie]);
+        this.board[this.index(this.walker.x,this.walker.y) ].classList.add(this.zombies[this.randomZombie], 'all');
         this.board[this.index(this.walker.x,this.walker.y) ].setAttribute('id' ,this.id);
         this.killTheWalker();
       } else {
         this.walker.x = this.walker.x+1;
-        this.board[this.index(this.walker.x,this.walker.y) ].classList.add(this.zombies[this.randomZombie]);
+        this.board[this.index(this.walker.x,this.walker.y) ].classList.add(this.zombies[this.randomZombie], 'all');
         this.board[this.index(this.walker.x,this.walker.y) ].setAttribute('id' ,this.id);
         this.killTheWalker();
       }
     } else {
-      this.board[this.index(this.walker.x,this.walker.y) ].classList.add(this.zombies[this.randomZombie]);
+      this.board[this.index(this.walker.x,this.walker.y) ].classList.add(this.zombies[this.randomZombie], 'all');
       this.board[this.index(this.walker.x,this.walker.y) ].setAttribute('id' ,this.id);
       this.killTheWalker();
     }
@@ -43,7 +44,7 @@ let Game = function(){
   }
   this.hideWalker = () =>{
     this.visible = document.getElementById(this.id);
-    this.visible.classList.remove(this.zombies[this.randomZombie]);
+    this.visible.classList.remove(this.zombies[this.randomZombie], 'all');
     this.visible.removeAttribute('id');
     this.board[this.index(this.walker.x,this.walker.y)].removeEventListener('click', this.killMe);
   }
@@ -54,6 +55,9 @@ let Game = function(){
       this.hideWalker();
       progress = progress - 10;
       progressBar.style.width = parseInt(progress)+"%";
+      if (progress === 0) {
+        this.boardPage.style.display = 'none';
+      }
       if (array.length > numOfWalkers) {
         this.nextRoundButton.style.display = 'flex';
       }
