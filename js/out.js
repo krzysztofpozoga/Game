@@ -96,6 +96,7 @@ var Game = function Game() {
   this.board = document.querySelectorAll('#board div');
   this.nextRoundButton = document.getElementById('next');
   this.walker = new Walker();
+  console.log(this.walker.x);
   this.index = function (x, y) {
     return x + y * 10;
   };

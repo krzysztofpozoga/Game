@@ -19,6 +19,7 @@ let Game = function(){
   this.board = document.querySelectorAll('#board div');
   this.nextRoundButton = document.getElementById('next');
   this.walker = new Walker();
+  console.log(this.walker.x);
   this.index = (x,y) => {
     return x + (y * 10);
   }

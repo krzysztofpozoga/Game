@@ -8,6 +8,12 @@
     width: 50px;
     height: 50px;
   }
+  .grass {
+    background-image: url(../images/grass.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
   .zombieOne{
     background-image: url(../images/zombie1.png);
     background-size: cover;
