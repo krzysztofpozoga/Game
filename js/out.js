@@ -90,6 +90,8 @@ var Game = function Game() {
   var _this = this;
 
   this.id = i;
+  this.zombies = ['zombieOne', 'zombieTwo', 'zombieThree'];
+  this.randomZombie = Math.round(Math.random() * 2);
   this.board = document.querySelectorAll('#board div');
   this.nextRoundButton = document.getElementById('next');
   this.walker = new Walker();
@@ -100,24 +102,24 @@ var Game = function Game() {
     if (_this.board[_this.index(_this.walker.x, _this.walker.y)].hasAttribute('id')) {
       if (_this.walker.x === 9) {
         _this.walker.x = _this.walker.x - 1;
-        _this.board[_this.index(_this.walker.x, _this.walker.y)].classList.add('walker');
+        _this.board[_this.index(_this.walker.x, _this.walker.y)].classList.add(_this.zombies[_this.randomZombie]);
         _this.board[_this.index(_this.walker.x, _this.walker.y)].setAttribute('id', _this.id);
         _this.killTheWalker();
       } else {
         _this.walker.x = _this.walker.x + 1;
-        _this.board[_this.index(_this.walker.x, _this.walker.y)].classList.add('walker');
+        _this.board[_this.index(_this.walker.x, _this.walker.y)].classList.add(_this.zombies[_this.randomZombie]);
         _this.board[_this.index(_this.walker.x, _this.walker.y)].setAttribute('id', _this.id);
         _this.killTheWalker();
       }
     } else {
-      _this.board[_this.index(_this.walker.x, _this.walker.y)].classList.add('walker');
+      _this.board[_this.index(_this.walker.x, _this.walker.y)].classList.add(_this.zombies[_this.randomZombie]);
       _this.board[_this.index(_this.walker.x, _this.walker.y)].setAttribute('id', _this.id);
       _this.killTheWalker();
     }
   };
   this.hideWalker = function () {
     _this.visible = document.getElementById(_this.id);
-    _this.visible.classList.remove('walker');
+    _this.visible.classList.remove(_this.zombies[_this.randomZombie]);
     _this.visible.removeAttribute('id');
     _this.board[_this.index(_this.walker.x, _this.walker.y)].removeEventListener('click', _this.killMe);
   };

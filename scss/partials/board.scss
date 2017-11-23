@@ -8,6 +8,30 @@
     width: 50px;
     height: 50px;
   }
+  .zombieOne{
+    background-image: url(../images/zombie1.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .zombieTwo{
+    background-image: url(../images/zombie2.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .zombieThree{
+    background-image: url(../images/zombie3.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .fence {
+    background-image: url(../images/fence.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
   .progressBar {
     background-color: white;
     width: 100%;
