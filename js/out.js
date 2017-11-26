@@ -234,8 +234,9 @@ var Start = function Start() {
 
   this.startButton = document.getElementById('start');
   this.boardSection = document.getElementById('board');
+  this.storySection = document.getElementById('story');
   this.start = function () {
-    _this3.startButton.style.display = 'none';
+    _this3.storySection.style.display = 'none';
     _this3.boardSection.style.display = 'flex';
     var round = new Round();
   };

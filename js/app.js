@@ -155,8 +155,9 @@ let Round = function(){
 let Start = function(){
   this.startButton = document.getElementById('start');
   this.boardSection = document.getElementById('board');
+  this.storySection = document.getElementById('story');
   this.start = () =>{
-    this.startButton.style.display = 'none';
+    this.storySection.style.display = 'none';
     this.boardSection.style.display = 'flex';
     let round = new Round();
   }
