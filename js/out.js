@@ -161,9 +161,17 @@ var Game = function Game() {
     if (array.length < numOfWalkers + 1) {
       _this.removeInterval();
       _this.hideWalker();
+      _this.visible.classList.add('explosion');
+      var timeout = setTimeout(function () {
+        _this.visible.classList.remove('explosion');
+      }, 100);
     } else {
       _this.removeInterval();
       _this.hideWalker();
+      _this.visible.classList.add('explosion');
+      var _timeout = setTimeout(function () {
+        _this.visible.classList.remove('explosion');
+      }, 100);
       _this.nextRoundButton.style.display = 'flex';
     }
   };

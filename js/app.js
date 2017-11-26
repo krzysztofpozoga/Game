@@ -85,9 +85,17 @@ let Game = function(){
     if (array.length < numOfWalkers+1) {
       this.removeInterval();
       this.hideWalker();
+      this.visible.classList.add('explosion');
+      let	timeout	=	setTimeout(() =>{
+        this.visible.classList.remove('explosion');
+      },	100);
     } else {
       this.removeInterval();
       this.hideWalker();
+      this.visible.classList.add('explosion');
+      let	timeout	=	setTimeout(() =>{
+        this.visible.classList.remove('explosion');
+      },	100);
       this.nextRoundButton.style.display = 'flex';
     }
 
