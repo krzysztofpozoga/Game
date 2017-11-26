@@ -38,6 +38,18 @@
   }
 }
 
+@keyframes showing {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 #mainPage {
   display: flex;
   align-items: center;
@@ -69,5 +81,11 @@
 .hidding {
   animation-name: hidding;
   animation-duration: 4s;
+  animation-fill-mode: forwards;
+}
+
+.showing {
+  animation-name: showing;
+  animation-duration: 3s;
   animation-fill-mode: forwards;
 }

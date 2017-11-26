@@ -159,7 +159,11 @@ let Start = function(){
   this.start = () =>{
     this.storySection.style.display = 'none';
     this.boardSection.style.display = 'flex';
-    let round = new Round();
+    this.boardSection.classList.add('showing');
+    let	timeout	=	setTimeout(() =>{
+      let round = new Round();
+    },	4000);
+
   }
   this.startButton.addEventListener('click', this.start);
 }

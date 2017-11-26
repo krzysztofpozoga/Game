@@ -1,8 +1,9 @@
 #board {
   display: none;
   flex-wrap: wrap;
-  width: 500px;
+  width: 502px;
   margin: 1em auto;
+  border: 1px solid red;
   div {
     border: 1px solid black;
     width: 50px;

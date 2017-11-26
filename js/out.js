@@ -238,7 +238,10 @@ var Start = function Start() {
   this.start = function () {
     _this3.storySection.style.display = 'none';
     _this3.boardSection.style.display = 'flex';
-    var round = new Round();
+    _this3.boardSection.classList.add('showing');
+    var timeout = setTimeout(function () {
+      var round = new Round();
+    }, 4000);
   };
   this.startButton.addEventListener('click', this.start);
 };
