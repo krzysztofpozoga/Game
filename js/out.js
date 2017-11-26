@@ -243,7 +243,9 @@ var Start = function Start() {
   this.startButton = document.getElementById('start');
   this.boardSection = document.getElementById('board');
   this.storySection = document.getElementById('story');
+  this.themeSong = document.getElementById('themeSong');
   this.start = function () {
+    _this3.themeSong.pause();
     _this3.storySection.style.display = 'none';
     _this3.boardSection.style.display = 'flex';
     _this3.boardSection.classList.add('showing');

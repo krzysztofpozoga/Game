@@ -164,7 +164,9 @@ let Start = function(){
   this.startButton = document.getElementById('start');
   this.boardSection = document.getElementById('board');
   this.storySection = document.getElementById('story');
+  this.themeSong = document.getElementById('themeSong');
   this.start = () =>{
+    this.themeSong.pause();
     this.storySection.style.display = 'none';
     this.boardSection.style.display = 'flex';
     this.boardSection.classList.add('showing');
