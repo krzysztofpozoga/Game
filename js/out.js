@@ -95,6 +95,7 @@ var Game = function Game() {
   this.boardPage = document.querySelector('#board');
   this.board = document.querySelectorAll('#board div');
   this.nextRoundButton = document.getElementById('next');
+  this.gunShot = document.getElementById('gunShot');
   this.walker = new Walker();
   console.log(this.walker.x);
   this.index = function (x, y) {
@@ -157,6 +158,7 @@ var Game = function Game() {
   };
 
   this.killMe = function () {
+    _this.gunShot.play();
     array.push(_this.walker);
     if (array.length < numOfWalkers + 1) {
       _this.removeInterval();
