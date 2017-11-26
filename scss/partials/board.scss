@@ -1,9 +1,10 @@
 #board {
   display: none;
+  justify-content: center;
   flex-wrap: wrap;
-  width: 502px;
+  width: 500px;
   margin: 1em auto;
-  border: 1px solid red;
+  // border: 1px solid red;
   div {
     border: 1px solid black;
     width: 50px;
@@ -46,6 +47,23 @@
     .hit {
       background-color: green;
       height: 100%;
+    }
+  }
+  #next {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Nosifer';
+    font-size: 1.5em;
+    width: 50%;
+    text-shadow: 2px 0 0 red, -2px 0 0 red, 0 2px 0 red, 0 -2px 0 red, 2px 2px red, -2px -2px 0 red, 2px -2px 0 red, -2px 2px 0 red;
+    color: silver;
+    cursor: pointer;
+    border: 2px solid red;
+    border-radius: 5px;
+    &:hover {
+      background-color: silver;
+      color: black;
     }
   }
 }
