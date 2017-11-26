@@ -8,6 +8,7 @@
   .slide {
     display: flex;
     align-items: flex-end;
+    justify-content: center;
     height: 100%;
     width:70%;
     background-size: contain;
@@ -17,22 +18,21 @@
     animation-duration: 40s;
     animation-fill-mode: forwards;
     animation-delay: 1s;
-    .skip {
-      font-size: 2em;
-      text-align: center;
-      background-color: silver;
-      width:10%;
-      cursor: pointer;
-      border: 2px solid red;
-      border-radius: 5px;
-    }
     #start {
+      display: flex;
+      justify-content: center;
+      font-family: 'Nosifer';
       font-size: 2em;
-      text-align: center;
-      background-color: silver;
+      width: 20%;
+      text-shadow: 2px 0 0 red, -2px 0 0 red, 0 2px 0 red, 0 -2px 0 red, 2px 2px red, -2px -2px 0 red, 2px -2px 0 red, -2px 2px 0 red;
+      color: silver;
       cursor: pointer;
       border: 2px solid red;
       border-radius: 5px;
+      &:hover {
+        background-color: silver;
+        color: black;
+      }
     }
   }
 }

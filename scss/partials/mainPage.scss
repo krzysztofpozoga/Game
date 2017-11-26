@@ -54,7 +54,10 @@
     font-family: 'Nosifer';
     font-size: 3em;
     letter-spacing: 0.2em;
-    text-shadow: 2px 0 0 red, -2px 0 0 red, 0 2px 0 red, 0 -2px 0 red, 2px 2px red, -2px -2px 0 red, 2px -2px 0 red, -2px 2px 0 red;
+    text-shadow: 2px 0 0 black, -2px 0 0 black, 0 2px 0 black, 0 -2px 0 black, 2px 2px black, -2px -2px 0 black, 2px -2px 0 black, -2px 2px 0 black;
+    &:hover {
+      text-shadow: 2px 0 0 red, -2px 0 0 red, 0 2px 0 red, 0 -2px 0 red, 2px 2px red, -2px -2px 0 red, 2px -2px 0 red, -2px 2px 0 red;
+    }
   }
   .bloodEffect {
       color:silver;
