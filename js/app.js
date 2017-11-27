@@ -9,6 +9,7 @@ progressBar.style.width = parseInt(progress)+"%";
 let Walker = function(){
   this.x = Math.floor(Math.random() * 10);
   this.y = 0;
+  this.gunShot = document.getElementById('gunShot');
 }
 
 let Game = function(){
@@ -18,7 +19,7 @@ let Game = function(){
   this.boardPage = document.querySelector('#board');
   this.board = document.querySelectorAll('#board div');
   this.nextRoundButton = document.getElementById('next');
-  this.gunShot = document.getElementById('gunShot');
+
   this.walker = new Walker();
   console.log(this.walker.x);
   this.index = (x,y) => {
@@ -82,7 +83,8 @@ let Game = function(){
   }
 
   this.killMe = () =>{
-    this.gunShot.play();
+    this.walker.gunShot.currentTime = 0;
+    this.walker.gunShot.play();
     array.push(this.walker);
     if (array.length < numOfWalkers+1) {
       this.removeInterval();
