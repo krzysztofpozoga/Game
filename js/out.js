@@ -153,6 +153,7 @@ var Game = function Game() {
       }
     }
   };
+
   this.moveWalker = function () {
     _this.hideWalker();
     _this.walker.y = _this.walker.y + 1;

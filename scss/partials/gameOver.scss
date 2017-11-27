@@ -1,0 +1,27 @@
+#gameOver {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-image: url(../images/gameOver.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  #again {
+    display: flex;
+    justify-content: center;
+    font-family: 'Nosifer';
+    font-size: 2em;
+    width: 20%;
+    text-shadow: 2px 0 0 red, -2px 0 0 red, 0 2px 0 red, 0 -2px 0 red, 2px 2px red, -2px -2px 0 red, 2px -2px 0 red, -2px 2px 0 red;
+    color: silver;
+    cursor: pointer;
+    border: 2px solid red;
+    border-radius: 5px;
+    &:hover {
+      background-color: silver;
+      color: black;
+    }
+  }
+}

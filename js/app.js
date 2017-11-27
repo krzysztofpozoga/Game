@@ -77,6 +77,7 @@ let Game = function(){
       }
     }
   }
+  
   this.moveWalker = () =>{
     this.hideWalker();
     this.walker.y = this.walker.y + 1;
