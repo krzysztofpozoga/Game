@@ -134,7 +134,7 @@ var Game = function Game() {
       array.push(_this.walker);
       _this.removeInterval();
       _this.hideWalker();
-      progress = progress - 10;
+      progress = progress - 50;
       progressBar.style.width = parseInt(progress) + "%";
       if (progress <= 100 && progress >= 80) {
         progressBar.style.backgroundColor = "green";
@@ -146,7 +146,8 @@ var Game = function Game() {
         progressBar.style.backgroundColor = "red";
       }
       if (progress === 0) {
-        _this.boardPage.style.display = 'none';
+        // this.boardPage.style.display = 'none';
+        _this.gameOver();
       }
       if (array.length > numOfWalkers) {
         _this.nextRoundButton.style.visibility = 'visible';
@@ -168,6 +169,18 @@ var Game = function Game() {
         _this.walker.gunShot.play();
       });
     }
+  };
+
+  this.gameOver = function () {
+    console.log('KONIEC');
+    // let killAll = document.querySelectorAll('.grass');
+    // for(let y = 0; y < killAll.length; y++){
+    //   if(killAll[y].hasAttribute('id')){
+    //     killAll[y].classList.remove('zombieOne', 'zombieTwo', 'zombieThree', 'all');
+    //     killAll[y].removeAttribute('id');
+    //     killAll[y].removeEventListener('click', this.killMe);
+    //   }
+    // }
   };
 
   this.killMe = function () {
@@ -202,7 +215,7 @@ var Game = function Game() {
   };
 
   this.startGame = function () {
-    var number = parseInt(Math.floor(Math.random() * 6 + 10)) + '00';
+    var number = parseInt(Math.floor(Math.random() * 4 + 7)) + '00';
     var sec = Number(number);
     var self = _this;
     if (roundCounter === 1) {
@@ -210,26 +223,25 @@ var Game = function Game() {
         _this.moveWalker();
       }, sec);
     } else if (roundCounter > 1 && roundCounter < 6) {
-      var _number = parseInt(Math.floor(Math.random() * 6 + 10)) + '00';
-      sec = Number(_number) - 50 * (roundCounter - 1);
+      number = parseInt(Math.floor(Math.random() * 4 + 7)) + '00';
+      sec = Number(number) - 50 * (roundCounter - 1);
       _this.idSetInterval = setInterval(function () {
         _this.moveWalker();
       }, sec);
     } else if (roundCounter === 6) {
-      number = parseInt(Math.floor(Math.random() * 4 + 7)) + '00';
+      number = parseInt(Math.floor(Math.random() * 4 + 2)) + '00';
       sec = Number(number);
       _this.idSetInterval = setInterval(function () {
         _this.moveWalker();
       }, sec);
     } else if (roundCounter > 6 && roundCounter < 15) {
-      number = parseInt(Math.floor(Math.random() * 4 + 7)) + '00';
+      number = parseInt(Math.floor(Math.random() * 4 + 2)) + '00';
       sec = Number(number) - 50 * (roundCounter - 6);
       _this.idSetInterval = setInterval(function () {
         _this.moveWalker();
       }, sec);
     } else if (roundCounter === 15) {
-      console.log(roundCounter);
-      number = parseInt(Math.floor(Math.random() * 4 + 2)) + '00';
+      number = parseInt(Math.floor(Math.random() * 5 + 1)) + '00';
       sec = Number(number);
       _this.idSetInterval = setInterval(function () {
         _this.moveWalker();

@@ -58,7 +58,7 @@ let Game = function(){
       array.push(this.walker);
       this.removeInterval();
       this.hideWalker();
-      progress = progress - 10;
+      progress = progress - 50;
       progressBar.style.width = parseInt(progress)+"%";
       if (progress <=100 && progress >=80) {
         progressBar.style.backgroundColor = "green";
@@ -70,14 +70,15 @@ let Game = function(){
         progressBar.style.backgroundColor = "red";
       }
       if (progress === 0) {
-        this.boardPage.style.display = 'none';
+        // this.boardPage.style.display = 'none';
+        this.gameOver();
       }
       if (array.length > numOfWalkers) {
         this.nextRoundButton.style.visibility = 'visible';
       }
     }
   }
-  
+
   this.moveWalker = () =>{
     this.hideWalker();
     this.walker.y = this.walker.y + 1;
@@ -92,6 +93,18 @@ let Game = function(){
         this.walker.gunShot.play();
       })
     }
+  }
+
+  this.gameOver = () => {
+    console.log('KONIEC');
+    // let killAll = document.querySelectorAll('.grass');
+    // for(let y = 0; y < killAll.length; y++){
+    //   if(killAll[y].hasAttribute('id')){
+    //     killAll[y].classList.remove('zombieOne', 'zombieTwo', 'zombieThree', 'all');
+    //     killAll[y].removeAttribute('id');
+    //     killAll[y].removeEventListener('click', this.killMe);
+    //   }
+    // }
   }
 
   this.killMe = () =>{
@@ -126,7 +139,7 @@ let Game = function(){
   }
 
   this.startGame = () =>{
-    let number = parseInt(Math.floor((Math.random() * 6) + 10))+'00';
+    let number = parseInt(Math.floor((Math.random() * 4) + 7))+'00';
     let sec = Number(number);
     let self = this;
     if (roundCounter === 1) {
@@ -134,26 +147,25 @@ let Game = function(){
         this.moveWalker();
       }, sec);
     } else if (roundCounter > 1 && roundCounter < 6) {
-      let number = parseInt(Math.floor((Math.random() * 6) + 10))+'00';
+      number = parseInt(Math.floor((Math.random() * 4) + 7))+'00';
       sec = Number(number) - (50*(roundCounter-1));
       this.idSetInterval = setInterval(()=>{
         this.moveWalker();
       }, sec);
     } else if (roundCounter === 6) {
-      number = parseInt(Math.floor((Math.random() * 4) + 7))+'00';
+      number = parseInt(Math.floor((Math.random() * 4) + 2))+'00';
       sec = Number(number);
       this.idSetInterval = setInterval(()=>{
         this.moveWalker();
       }, sec);
     } else if (roundCounter > 6 && roundCounter < 15) {
-      number = parseInt(Math.floor((Math.random() * 4) + 7))+'00';
+      number = parseInt(Math.floor((Math.random() * 4) + 2))+'00';
       sec = Number(number) - (50*(roundCounter-6));
       this.idSetInterval = setInterval(()=>{
         this.moveWalker();
       }, sec);
     } else if (roundCounter === 15) {
-      console.log(roundCounter);
-      number = parseInt(Math.floor((Math.random() * 4) + 2))+'00';
+      number = parseInt(Math.floor((Math.random() * 5) + 1))+'00';
       sec = Number(number);
       this.idSetInterval = setInterval(()=>{
         this.moveWalker();
