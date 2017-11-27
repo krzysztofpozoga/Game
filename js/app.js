@@ -70,7 +70,7 @@ let Game = function(){
         this.boardPage.style.display = 'none';
       }
       if (array.length > numOfWalkers) {
-        this.nextRoundButton.style.display = 'flex';
+        this.nextRoundButton.style.visibility = 'visible';
       }
     }
   }
@@ -106,7 +106,7 @@ let Game = function(){
       let	timeout	=	setTimeout(() =>{
         this.visible.classList.remove('explosion');
       },	100);
-      this.nextRoundButton.style.display = 'flex';
+      this.nextRoundButton.style.visibility = 'visible';
     }
 
   }
@@ -159,8 +159,10 @@ let Game = function(){
 
 let Round = function(){
   this.round = document.getElementById('round');
+  this.score = document.getElementById('score');
   this.roundNumber = this.round.querySelector('span');
   this.roundNumber.innerHTML = roundCounter;
+  this.score.style.display = 'flex';
   this.round.style.display = 'flex';
   this.walkersInterval = setInterval(()=>{
     if (i>numOfWalkers) {
@@ -200,7 +202,7 @@ let NextRound = function(){
     roundCounter = roundCounter+1;
     i = 0;
     array = [];
-    this.nextButton.style.display = 'none';
+    this.nextButton.style.visibility = 'hidden';
     let round = new Round();
   }
   this.nextButton.addEventListener('click', this.nextRound);

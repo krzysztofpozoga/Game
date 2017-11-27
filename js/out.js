@@ -146,7 +146,7 @@ var Game = function Game() {
         _this.boardPage.style.display = 'none';
       }
       if (array.length > numOfWalkers) {
-        _this.nextRoundButton.style.display = 'flex';
+        _this.nextRoundButton.style.visibility = 'visible';
       }
     }
   };
@@ -182,7 +182,7 @@ var Game = function Game() {
       var _timeout = setTimeout(function () {
         _this.visible.classList.remove('explosion');
       }, 100);
-      _this.nextRoundButton.style.display = 'flex';
+      _this.nextRoundButton.style.visibility = 'visible';
     }
   };
 
@@ -236,8 +236,10 @@ var Round = function Round() {
   var _this2 = this;
 
   this.round = document.getElementById('round');
+  this.score = document.getElementById('score');
   this.roundNumber = this.round.querySelector('span');
   this.roundNumber.innerHTML = roundCounter;
+  this.score.style.display = 'flex';
   this.round.style.display = 'flex';
   this.walkersInterval = setInterval(function () {
     if (i > numOfWalkers) {
@@ -280,7 +282,7 @@ var NextRound = function NextRound() {
     roundCounter = roundCounter + 1;
     i = 0;
     array = [];
-    _this4.nextButton.style.display = 'none';
+    _this4.nextButton.style.visibility = 'hidden';
     var round = new Round();
   };
   this.nextButton.addEventListener('click', this.nextRound);

@@ -1,11 +1,21 @@
 #board {
   display: none;
   justify-content: center;
+  align-items: center;
+  height: 100vh;
   .left {
     width: 400px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
     h2 {
+      display: none;
+      font-family: 'Nosifer';
+      font-size: 1.5em;
+      color: silver;
+    }
+    h3 {
       display: none;
       font-family: 'Nosifer';
       font-size: 1.5em;
@@ -68,7 +78,8 @@
       }
     }
     #next {
-      display: none;
+      display: flex;
+      visibility: hidden;
       justify-content: center;
       align-items: center;
       font-family: 'Nosifer';
