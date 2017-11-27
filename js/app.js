@@ -4,6 +4,7 @@ let array = [];
 let roundCounter = 1;
 let progressBar = document.querySelector('.progressBar .hit');
 let progress = 100;
+let score = 0;
 progressBar.style.width = parseInt(progress)+"%";
 
 let Walker = function(){
@@ -20,6 +21,8 @@ let Game = function(){
   this.board = document.querySelectorAll('#board div');
   this.boardSpot = document.querySelectorAll('.grass');
   this.nextRoundButton = document.getElementById('next');
+  this.score = document.getElementById('score');
+  this.scoreNumber = this.score.querySelector('span');
   this.walker = new Walker();
   this.index = (x,y) => {
     return x + (y * 10);
@@ -108,7 +111,8 @@ let Game = function(){
       },	100);
       this.nextRoundButton.style.visibility = 'visible';
     }
-
+    score = score +1;
+    this.scoreNumber.innerHTML=score;
   }
 
   this.killTheWalker = () =>{
@@ -160,6 +164,7 @@ let Game = function(){
 let Round = function(){
   this.round = document.getElementById('round');
   this.score = document.getElementById('score');
+  this.scoreNumber = this.score.querySelector('span');
   this.roundNumber = this.round.querySelector('span');
   this.roundNumber.innerHTML = roundCounter;
   this.score.style.display = 'flex';

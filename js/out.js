@@ -79,6 +79,7 @@ var array = [];
 var roundCounter = 1;
 var progressBar = document.querySelector('.progressBar .hit');
 var progress = 100;
+var score = 0;
 progressBar.style.width = parseInt(progress) + "%";
 
 var Walker = function Walker() {
@@ -97,6 +98,8 @@ var Game = function Game() {
   this.board = document.querySelectorAll('#board div');
   this.boardSpot = document.querySelectorAll('.grass');
   this.nextRoundButton = document.getElementById('next');
+  this.score = document.getElementById('score');
+  this.scoreNumber = this.score.querySelector('span');
   this.walker = new Walker();
   this.index = function (x, y) {
     return x + y * 10;
@@ -184,6 +187,8 @@ var Game = function Game() {
       }, 100);
       _this.nextRoundButton.style.visibility = 'visible';
     }
+    score = score + 1;
+    _this.scoreNumber.innerHTML = score;
   };
 
   this.killTheWalker = function () {
@@ -237,6 +242,7 @@ var Round = function Round() {
 
   this.round = document.getElementById('round');
   this.score = document.getElementById('score');
+  this.scoreNumber = this.score.querySelector('span');
   this.roundNumber = this.round.querySelector('span');
   this.roundNumber.innerHTML = roundCounter;
   this.score.style.display = 'flex';
