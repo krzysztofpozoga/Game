@@ -235,6 +235,10 @@ var Game = function Game() {
 var Round = function Round() {
   var _this2 = this;
 
+  this.round = document.getElementById('round');
+  this.roundNumber = this.round.querySelector('span');
+  this.roundNumber.innerHTML = roundCounter;
+  this.round.style.display = 'flex';
   this.walkersInterval = setInterval(function () {
     if (i > numOfWalkers) {
       clearInterval(_this2.walkersInterval);

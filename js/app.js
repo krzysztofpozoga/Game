@@ -158,6 +158,10 @@ let Game = function(){
 }
 
 let Round = function(){
+  this.round = document.getElementById('round');
+  this.roundNumber = this.round.querySelector('span');
+  this.roundNumber.innerHTML = roundCounter;
+  this.round.style.display = 'flex';
   this.walkersInterval = setInterval(()=>{
     if (i>numOfWalkers) {
       clearInterval(this.walkersInterval);

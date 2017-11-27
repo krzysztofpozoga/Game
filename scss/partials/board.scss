@@ -1,74 +1,89 @@
 #board {
   display: none;
   justify-content: center;
-  flex-wrap: wrap;
-  width: 500px;
-  margin: 1em auto;
-  div {
-    border: 1px solid black;
-    width: 50px;
-    height: 50px;
-  }
-  .grass {
-    background-image: url(../images/grass.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-  .zombieOne{
-    background-image: url(../images/zombie1.png);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-  .zombieTwo{
-    background-image: url(../images/zombie2.png);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-  .zombieThree{
-    background-image: url(../images/zombie3.png);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-  .fence {
-    background-image: url(../images/fence.png);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-  .explosion {
-    background-image: url(../images/explosion.png);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-  .progressBar {
-    background-color: white;
-    width: 100%;
-    border-radius: 5px;
-    .hit {
-      background-color: green;
-      height: 100%;
-    }
-  }
-  #next {
-    display: none;
+  .left {
+    width: 400px;
+    display: flex;
     justify-content: center;
-    align-items: center;
-    font-family: 'Nosifer';
-    font-size: 1.5em;
-    width: 50%;
-    text-shadow: 2px 0 0 red, -2px 0 0 red, 0 2px 0 red, 0 -2px 0 red, 2px 2px red, -2px -2px 0 red, 2px -2px 0 red, -2px 2px 0 red;
-    color: silver;
-    cursor: pointer;
-    border: 2px solid red;
-    border-radius: 5px;
-    &:hover {
-      background-color: silver;
-      color: black;
+    h2 {
+      display: none;
+      font-family: 'Nosifer';
+      font-size: 1.5em;
+      color: silver;
     }
   }
+  .right {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 500px;
+    div {
+      border: 1px solid black;
+      width: 50px;
+      height: 50px;
+    }
+    .grass {
+      background-image: url(../images/grass.jpg);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .zombieOne{
+      background-image: url(../images/zombie1.png);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .zombieTwo{
+      background-image: url(../images/zombie2.png);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .zombieThree{
+      background-image: url(../images/zombie3.png);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .fence {
+      background-image: url(../images/fence.png);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .explosion {
+      background-image: url(../images/explosion.png);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .progressBar {
+      background-color: white;
+      width: 100%;
+      border-radius: 5px;
+      .hit {
+        background-color: green;
+        height: 100%;
+      }
+    }
+    #next {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Nosifer';
+      font-size: 1.5em;
+      width: 50%;
+      text-shadow: 2px 0 0 red, -2px 0 0 red, 0 2px 0 red, 0 -2px 0 red, 2px 2px red, -2px -2px 0 red, 2px -2px 0 red, -2px 2px 0 red;
+      color: silver;
+      cursor: pointer;
+      border: 2px solid red;
+      border-radius: 5px;
+      &:hover {
+        background-color: silver;
+        color: black;
+      }
+    }
+  }
+
 }
