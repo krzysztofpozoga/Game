@@ -18,10 +18,9 @@ let Game = function(){
   this.randomZombie = Math.round(Math.random() * 2);
   this.boardPage = document.querySelector('#board');
   this.board = document.querySelectorAll('#board div');
+  this.boardSpot = document.querySelectorAll('.grass');
   this.nextRoundButton = document.getElementById('next');
-
   this.walker = new Walker();
-  console.log(this.walker.x);
   this.index = (x,y) => {
     return x + (y * 10);
   }
@@ -82,9 +81,16 @@ let Game = function(){
     this.hitTheWall();
   }
 
+  this.gunSound = () =>{
+    for( let i = 0; i<this.boardSpot.length; i++) {
+      this.boardSpot[i].addEventListener('click', ()=>{
+        this.walker.gunShot.currentTime = 0;
+        this.walker.gunShot.play();
+      })
+    }
+  }
+
   this.killMe = () =>{
-    this.walker.gunShot.currentTime = 0;
-    this.walker.gunShot.play();
     array.push(this.walker);
     if (array.length < numOfWalkers+1) {
       this.removeInterval();
@@ -160,6 +166,7 @@ let Round = function(){
       let game = new Game();
       game.showWalker();
       game.startGame();
+      game.gunSound();
     }
   }, 1000)
 }
