@@ -73,6 +73,7 @@ let Game = function(){
   this.randomZombie = Math.round(Math.random() * 2);
   this.boardPage = document.querySelector('#board');
   this.gameOverPage = document.getElementById('gameOver');
+  this.againButton = document.getElementById('again');
   this.board = document.querySelectorAll('#board div');
   this.boardSpot = document.querySelectorAll('.grass');
   this.nextRoundButton = document.getElementById('next');
@@ -152,7 +153,7 @@ let Game = function(){
   this.gameOver = () => {
     this.boardPage.style.display = 'none';
     this.gameOverPage.style.display = 'flex';
-    this.gameOverPage.classList.add('showing');
+    this.againButton.classList.add('showing');
   }
 
   this.killMe = () =>{

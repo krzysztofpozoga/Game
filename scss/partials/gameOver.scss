@@ -1,5 +1,6 @@
 #gameOver {
   display: none;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
@@ -8,6 +9,11 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  h3 {
+    font-family: 'Nosifer';
+    font-size: 4em;
+    text-shadow: 2px 0 0 red, -2px 0 0 red, 0 2px 0 red, 0 -2px 0 red, 2px 2px red, -2px -2px 0 red, 2px -2px 0 red, -2px 2px 0 red;
+  }
   #again {
     display: flex;
     justify-content: center;
@@ -19,6 +25,7 @@
     cursor: pointer;
     border: 2px solid red;
     border-radius: 5px;
+    opacity: 0;
     &:hover {
       background-color: silver;
       color: black;
