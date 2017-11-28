@@ -1,20 +1,74 @@
-let i = 0;
-let numOfWalkers = 9;
-let array = [];
-let roundCounter = 1;
-let progressBar = document.querySelector('.progressBar .hit');
-let progress = 100;
-let score = 0;
-progressBar.style.width = parseInt(progress)+"%";
+import GameVariables from './partials/gameVariables.js';
+import Walker from './partials/walker.js';
+import MainPage from './partials/mainPage.js';
 
-let Walker = function(){
-  this.x = Math.floor(Math.random() * 10);
-  this.y = 0;
-  this.gunShot = document.getElementById('gunShot');
+let gameVariables = new GameVariables();
+let mainPage = new MainPage();
+
+let Start = function(){
+  this.startButton = document.getElementById('start');
+  this.boardSection = document.getElementById('board');
+  this.storySection = document.getElementById('story');
+  this.themeSong = document.getElementById('themeSong');
+  this.start = () =>{
+    this.themeSong.pause();
+    this.storySection.style.display = 'none';
+    this.boardSection.style.display = 'flex';
+    this.boardSection.classList.add('showing');
+    let	timeout	=	setTimeout(() =>{
+      let round = new Round();
+    },	4000);
+
+  }
+  this.startButton.addEventListener('click', this.start);
+}
+let start = new Start();
+
+let Round = function(){
+  let seconds = 1000;
+  this.round = document.getElementById('round');
+  this.score = document.getElementById('score');
+  this.primaryImage = document.getElementById('primaryImage');
+  this.scoreNumber = this.score.querySelector('span');
+  this.roundNumber = this.round.querySelector('span');
+  this.roundNumber.innerHTML = gameVariables.roundCounter;
+  this.score.style.display = 'flex';
+  this.round.style.display = 'flex';
+  this.primaryImage.style.display = 'flex';
+  if (gameVariables.roundCounter === 9 || gameVariables.roundCounter === 10) {
+    gameVariables.numOfWalkers = gameVariables.numOfWalkers + 5;
+  };
+  if (gameVariables.roundCounter >=1 && gameVariables.roundCounter <9) {
+    seconds = seconds - 50*(gameVariables.roundCounter-1);
+  }
+  this.walkersInterval = setInterval(()=>{
+    if (gameVariables.i>gameVariables.numOfWalkers) {
+      clearInterval(this.walkersInterval);
+    } else {
+      gameVariables.i++;
+      let game = new Game();
+      game.showWalker();
+      game.startGame();
+      game.gunSound();
+    }
+  }, seconds);
+}
+let NextRound = function(){
+  this.nextButton = document.getElementById('next');
+  this.nextRound = () => {
+    gameVariables.roundCounter = gameVariables.roundCounter+1;
+    gameVariables.i = 0;
+    gameVariables.array = [];
+    this.nextButton.style.visibility = 'hidden';
+    let round = new Round();
+  }
+  this.nextButton.addEventListener('click', this.nextRound);
 }
 
+let nextRound = new NextRound();
+
 let Game = function(){
-  this.id = i;
+  this.id = gameVariables.i;
   this.zombies = ['zombieOne', 'zombieTwo', 'zombieThree'];
   this.randomZombie = Math.round(Math.random() * 2);
   this.boardPage = document.querySelector('#board');
@@ -56,24 +110,24 @@ let Game = function(){
   }
   this.hitTheWall = () =>{
     if (this.walker.y > 8) {
-      array.push(this.walker);
+      gameVariables.array.push(this.walker);
       this.removeInterval();
       this.hideWalker();
-      progress = progress - 10;
-      progressBar.style.width = parseInt(progress)+"%";
-      if (progress <=100 && progress >=80) {
-        progressBar.style.backgroundColor = "green";
-      } else if (progress <80 && progress >=60) {
-        progressBar.style.backgroundColor = "yellow";
-      } else if (progress <60 && progress >=40) {
-        progressBar.style.backgroundColor = "orange";
-      } else if (progress <40) {
-        progressBar.style.backgroundColor = "red";
+      gameVariables.progress = gameVariables.progress - 10;
+      gameVariables.progressBar.style.width = parseInt(gameVariables.progress)+"%";
+      if (gameVariables.progress <=100 && gameVariables.progress >=80) {
+        gameVariables.progressBar.style.backgroundColor = "green";
+      } else if (gameVariables.progress <80 && gameVariables.progress >=60) {
+        gameVariables.progressBar.style.backgroundColor = "yellow";
+      } else if (gameVariables.progress <60 && gameVariables.progress >=40) {
+        gameVariables.progressBar.style.backgroundColor = "orange";
+      } else if (gameVariables.progress <40) {
+        gameVariables.progressBar.style.backgroundColor = "red";
       }
-      if (progress === 0) {
+      if (gameVariables.progress === 0) {
         this.gameOver();
       }
-      if (array.length > numOfWalkers) {
+      if (gameVariables.array.length > gameVariables.numOfWalkers) {
         this.nextRoundButton.style.visibility = 'visible';
       }
     }
@@ -102,8 +156,8 @@ let Game = function(){
   }
 
   this.killMe = () =>{
-    array.push(this.walker);
-    if (array.length < numOfWalkers+1) {
+    gameVariables.array.push(this.walker);
+    if (gameVariables.array.length < gameVariables.numOfWalkers+1) {
       this.removeInterval();
       this.hideWalker();
       this.visible.classList.add('explosion');
@@ -119,8 +173,8 @@ let Game = function(){
       },	100);
       this.nextRoundButton.style.visibility = 'visible';
     }
-    score = score +1;
-    this.scoreNumber.innerHTML=score;
+    gameVariables.score = gameVariables.score +1;
+    this.scoreNumber.innerHTML=gameVariables.score;
   }
 
   this.killTheWalker = () =>{
@@ -136,66 +190,36 @@ let Game = function(){
     let number = parseInt(Math.floor((Math.random() * 4) + 7))+'00';
     let sec = Number(number);
     let self = this;
-    if (roundCounter === 1) {
+    if (gameVariables.roundCounter === 1) {
       this.idSetInterval = setInterval(()=>{
         this.moveWalker();
       }, sec);
-    } else if (roundCounter > 1 && roundCounter < 9) {
+    } else if (gameVariables.roundCounter > 1 && gameVariables.roundCounter < 9) {
       number = parseInt(Math.floor((Math.random() * 4) + 7))+'00';
-      sec = Number(number) - (50*(roundCounter-1));
+      sec = Number(number) - (50*(gameVariables.roundCounter-1));
       this.idSetInterval = setInterval(()=>{
         this.moveWalker();
       }, sec);
-    } else if (roundCounter === 9) {
+    } else if (gameVariables.roundCounter === 9) {
       number = parseInt(Math.floor((Math.random() * 4) + 7))+'00';
-      sec = Number(number) - (50*(roundCounter-2));
+      sec = Number(number) - (50*(gameVariables.roundCounter-2));
       this.idSetInterval = setInterval(()=>{
         this.moveWalker();
       }, sec);
-    } else if (roundCounter === 10) {
+    } else if (gameVariables.roundCounter === 10) {
       number = parseInt(Math.floor((Math.random() * 4) + 7))+'00';
-      sec = Number(number) - (50*(roundCounter-3));
+      sec = Number(number) - (50*(gameVariables.roundCounter-3));
       this.idSetInterval = setInterval(()=>{
         this.moveWalker();
       }, sec);
-    } else if (roundCounter > 10 && roundCounter <= 15) {
+    } else if (gameVariables.roundCounter > 10 && gameVariables.roundCounter <= 15) {
       number = parseInt(Math.floor((Math.random() * 4) + 7))+'00';
-      sec = Number(number) - (50*(roundCounter-1));
+      sec = Number(number) - (50*(gameVariables.roundCounter-1));
       this.idSetInterval = setInterval(()=>{
         this.moveWalker();
       }, sec);
     }
   }
-}
-
-let Round = function(){
-  let seconds = 1000;
-  this.round = document.getElementById('round');
-  this.score = document.getElementById('score');
-  this.primaryImage = document.getElementById('primaryImage');
-  this.scoreNumber = this.score.querySelector('span');
-  this.roundNumber = this.round.querySelector('span');
-  this.roundNumber.innerHTML = roundCounter;
-  this.score.style.display = 'flex';
-  this.round.style.display = 'flex';
-  this.primaryImage.style.display = 'flex';
-  if (roundCounter === 9 || roundCounter === 10) {
-    numOfWalkers = numOfWalkers + 5;
-  };
-  if (roundCounter >=1 && roundCounter <9) {
-    seconds = seconds - 50*(roundCounter-1);
-  }
-  this.walkersInterval = setInterval(()=>{
-    if (i>numOfWalkers) {
-      clearInterval(this.walkersInterval);
-    } else {
-      i++;
-      let game = new Game();
-      game.showWalker();
-      game.startGame();
-      game.gunSound();
-    }
-  }, seconds);
 }
 
 
@@ -208,16 +232,16 @@ let Again = function(){
   this.boardSection = document.getElementById('board');
   this.gameOverPage = document.getElementById('gameOver');
   this.start = () =>{
-    i = 0;
-    numOfWalkers = 9;
-    array = [];
-    roundCounter = 1;
-    progress = 100;
-    score = 0;
-    this.roundNumber.innerHTML = roundCounter;
-    this.scoreNumber.innerHTML = score;
-    progressBar.style.width = parseInt(progress)+"%";
-    progressBar.style.backgroundColor = 'green';
+    gameVariables.i = 0;
+    gameVariables.numOfWalkers = 9;
+    gameVariables.array = [];
+    gameVariables.roundCounter = 1;
+    gameVariables.progress = 100;
+    gameVariables.score = 0;
+    this.roundNumber.innerHTML = gameVariables.roundCounter;
+    this.scoreNumber.innerHTML = gameVariables.score;
+    gameVariables.progressBar.style.width = parseInt(gameVariables.progress)+"%";
+    gameVariables.progressBar.style.backgroundColor = 'green';
     nextRound.nextButton.style.visibility = 'hidden';
     this.gameOverPage.style.display = 'none';
     this.boardSection.style.display = 'flex';
@@ -230,62 +254,3 @@ let Again = function(){
   this.againButton.addEventListener('click', this.start);
 }
 let again = new Again();
-
-
-let Start = function(){
-  this.startButton = document.getElementById('start');
-  this.boardSection = document.getElementById('board');
-  this.storySection = document.getElementById('story');
-  this.themeSong = document.getElementById('themeSong');
-  this.start = () =>{
-    this.themeSong.pause();
-    this.storySection.style.display = 'none';
-    this.boardSection.style.display = 'flex';
-    this.boardSection.classList.add('showing');
-    let	timeout	=	setTimeout(() =>{
-      let round = new Round();
-    },	4000);
-
-  }
-  this.startButton.addEventListener('click', this.start);
-}
-let start = new Start();
-
-let NextRound = function(){
-  this.nextButton = document.getElementById('next');
-  this.nextRound = () => {
-    roundCounter = roundCounter+1;
-    i = 0;
-    array = [];
-    this.nextButton.style.visibility = 'hidden';
-    let round = new Round();
-  }
-  this.nextButton.addEventListener('click', this.nextRound);
-}
-
-let nextRound = new NextRound();
-
-
-///////////MAIN Page///////////
-
-let StoryPage = function(){
-  this.page = document.querySelector('#story');
-}
-
-let MainPage = function(){
-  this.story = new StoryPage();
-  this.main = document.querySelector('#mainPage');
-  this.title = document.querySelector('#mainPage h1');
-  this.beginning = () => {
-    this.title.classList.add('bloodEffect');
-    this.main.classList.add('hidding');
-    let	timeout	=	setTimeout(() =>{
-      this.main.style.display= 'none';
-      this.story.page.style.display = 'flex';
-    },	5000);
-
-  }
-  this.title.addEventListener('click', this.beginning);
-}
-
-let mainPage = new MainPage();
