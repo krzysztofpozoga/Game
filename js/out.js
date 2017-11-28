@@ -135,7 +135,7 @@ var Game = function Game() {
       array.push(_this.walker);
       _this.removeInterval();
       _this.hideWalker();
-      progress = progress - 50;
+      progress = progress - 10;
       progressBar.style.width = parseInt(progress) + "%";
       if (progress <= 100 && progress >= 80) {
         progressBar.style.backgroundColor = "green";
@@ -216,27 +216,27 @@ var Game = function Game() {
       _this.idSetInterval = setInterval(function () {
         _this.moveWalker();
       }, sec);
-    } else if (roundCounter > 1 && roundCounter < 6) {
+    } else if (roundCounter > 1 && roundCounter < 9) {
       number = parseInt(Math.floor(Math.random() * 4 + 7)) + '00';
       sec = Number(number) - 50 * (roundCounter - 1);
       _this.idSetInterval = setInterval(function () {
         _this.moveWalker();
       }, sec);
-    } else if (roundCounter === 6) {
-      number = parseInt(Math.floor(Math.random() * 4 + 2)) + '00';
-      sec = Number(number);
+    } else if (roundCounter === 9) {
+      number = parseInt(Math.floor(Math.random() * 4 + 7)) + '00';
+      sec = Number(number) - 50 * (roundCounter - 2);
       _this.idSetInterval = setInterval(function () {
         _this.moveWalker();
       }, sec);
-    } else if (roundCounter > 6 && roundCounter < 15) {
-      number = parseInt(Math.floor(Math.random() * 4 + 2)) + '00';
-      sec = Number(number) - 50 * (roundCounter - 6);
+    } else if (roundCounter === 10) {
+      number = parseInt(Math.floor(Math.random() * 4 + 7)) + '00';
+      sec = Number(number) - 50 * (roundCounter - 3);
       _this.idSetInterval = setInterval(function () {
         _this.moveWalker();
       }, sec);
-    } else if (roundCounter === 15) {
-      number = parseInt(Math.floor(Math.random() * 5 + 1)) + '00';
-      sec = Number(number);
+    } else if (roundCounter > 10 && roundCounter <= 15) {
+      number = parseInt(Math.floor(Math.random() * 4 + 7)) + '00';
+      sec = Number(number) - 50 * (roundCounter - 1);
       _this.idSetInterval = setInterval(function () {
         _this.moveWalker();
       }, sec);
@@ -247,6 +247,7 @@ var Game = function Game() {
 var Round = function Round() {
   var _this2 = this;
 
+  var seconds = 1000;
   this.round = document.getElementById('round');
   this.score = document.getElementById('score');
   this.scoreNumber = this.score.querySelector('span');
@@ -254,6 +255,12 @@ var Round = function Round() {
   this.roundNumber.innerHTML = roundCounter;
   this.score.style.display = 'flex';
   this.round.style.display = 'flex';
+  if (roundCounter === 9 || roundCounter === 10) {
+    numOfWalkers = numOfWalkers + 5;
+  };
+  if (roundCounter >= 1 && roundCounter < 9) {
+    seconds = seconds - 50 * (roundCounter - 1);
+  }
   this.walkersInterval = setInterval(function () {
     if (i > numOfWalkers) {
       clearInterval(_this2.walkersInterval);
@@ -264,7 +271,7 @@ var Round = function Round() {
       game.startGame();
       game.gunSound();
     }
-  }, 1000);
+  }, seconds);
 };
 
 var Again = function Again() {
