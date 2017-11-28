@@ -95,6 +95,7 @@ var Game = function Game() {
   this.zombies = ['zombieOne', 'zombieTwo', 'zombieThree'];
   this.randomZombie = Math.round(Math.random() * 2);
   this.boardPage = document.querySelector('#board');
+  this.gameOverPage = document.getElementById('gameOver');
   this.board = document.querySelectorAll('#board div');
   this.boardSpot = document.querySelectorAll('.grass');
   this.nextRoundButton = document.getElementById('next');
@@ -146,7 +147,6 @@ var Game = function Game() {
         progressBar.style.backgroundColor = "red";
       }
       if (progress === 0) {
-        // this.boardPage.style.display = 'none';
         _this.gameOver();
       }
       if (array.length > numOfWalkers) {
@@ -172,15 +172,9 @@ var Game = function Game() {
   };
 
   this.gameOver = function () {
-    console.log('KONIEC');
-    // let killAll = document.querySelectorAll('.grass');
-    // for(let y = 0; y < killAll.length; y++){
-    //   if(killAll[y].hasAttribute('id')){
-    //     killAll[y].classList.remove('zombieOne', 'zombieTwo', 'zombieThree', 'all');
-    //     killAll[y].removeAttribute('id');
-    //     killAll[y].removeEventListener('click', this.killMe);
-    //   }
-    // }
+    _this.boardPage.style.display = 'none';
+    _this.gameOverPage.style.display = 'flex';
+    _this.gameOverPage.classList.add('showing');
   };
 
   this.killMe = function () {
@@ -273,18 +267,51 @@ var Round = function Round() {
   }, 1000);
 };
 
-var Start = function Start() {
+var Again = function Again() {
   var _this3 = this;
+
+  this.round = document.getElementById('round');
+  this.score = document.getElementById('score');
+  this.scoreNumber = this.score.querySelector('span');
+  this.roundNumber = this.round.querySelector('span');
+  this.againButton = document.getElementById('again');
+  this.boardSection = document.getElementById('board');
+  this.gameOverPage = document.getElementById('gameOver');
+  this.start = function () {
+    i = 0;
+    numOfWalkers = 9;
+    array = [];
+    roundCounter = 1;
+    progress = 100;
+    score = 0;
+    _this3.roundNumber.innerHTML = roundCounter;
+    _this3.scoreNumber.innerHTML = score;
+    progressBar.style.width = parseInt(progress) + "%";
+    progressBar.style.backgroundColor = 'green';
+    nextRound.nextButton.style.visibility = 'hidden';
+    _this3.gameOverPage.style.display = 'none';
+    _this3.boardSection.style.display = 'flex';
+    _this3.boardSection.classList.add('showing');
+    var timeout = setTimeout(function () {
+      var round = new Round();
+    }, 4000);
+  };
+  this.againButton.addEventListener('click', this.start);
+};
+var again = new Again();
+
+var Start = function Start() {
+  var _this4 = this;
 
   this.startButton = document.getElementById('start');
   this.boardSection = document.getElementById('board');
   this.storySection = document.getElementById('story');
   this.themeSong = document.getElementById('themeSong');
   this.start = function () {
-    _this3.themeSong.pause();
-    _this3.storySection.style.display = 'none';
-    _this3.boardSection.style.display = 'flex';
-    _this3.boardSection.classList.add('showing');
+    _this4.themeSong.pause();
+    _this4.storySection.style.display = 'none';
+    _this4.boardSection.style.display = 'flex';
+    _this4.boardSection.classList.add('showing');
     var timeout = setTimeout(function () {
       var round = new Round();
     }, 4000);
@@ -294,14 +321,14 @@ var Start = function Start() {
 var start = new Start();
 
 var NextRound = function NextRound() {
-  var _this4 = this;
+  var _this5 = this;
 
   this.nextButton = document.getElementById('next');
   this.nextRound = function () {
     roundCounter = roundCounter + 1;
     i = 0;
     array = [];
-    _this4.nextButton.style.visibility = 'hidden';
+    _this5.nextButton.style.visibility = 'hidden';
     var round = new Round();
   };
   this.nextButton.addEventListener('click', this.nextRound);
@@ -316,17 +343,17 @@ var StoryPage = function StoryPage() {
 };
 
 var MainPage = function MainPage() {
-  var _this5 = this;
+  var _this6 = this;
 
   this.story = new StoryPage();
   this.main = document.querySelector('#mainPage');
   this.title = document.querySelector('#mainPage h1');
   this.beginning = function () {
-    _this5.title.classList.add('bloodEffect');
-    _this5.main.classList.add('hidding');
+    _this6.title.classList.add('bloodEffect');
+    _this6.main.classList.add('hidding');
     var timeout = setTimeout(function () {
-      _this5.main.style.display = 'none';
-      _this5.story.page.style.display = 'flex';
+      _this6.main.style.display = 'none';
+      _this6.story.page.style.display = 'flex';
     }, 5000);
   };
   this.title.addEventListener('click', this.beginning);

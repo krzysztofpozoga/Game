@@ -18,6 +18,7 @@ let Game = function(){
   this.zombies = ['zombieOne', 'zombieTwo', 'zombieThree'];
   this.randomZombie = Math.round(Math.random() * 2);
   this.boardPage = document.querySelector('#board');
+  this.gameOverPage = document.getElementById('gameOver');
   this.board = document.querySelectorAll('#board div');
   this.boardSpot = document.querySelectorAll('.grass');
   this.nextRoundButton = document.getElementById('next');
@@ -70,7 +71,6 @@ let Game = function(){
         progressBar.style.backgroundColor = "red";
       }
       if (progress === 0) {
-        // this.boardPage.style.display = 'none';
         this.gameOver();
       }
       if (array.length > numOfWalkers) {
@@ -96,15 +96,9 @@ let Game = function(){
   }
 
   this.gameOver = () => {
-    console.log('KONIEC');
-    // let killAll = document.querySelectorAll('.grass');
-    // for(let y = 0; y < killAll.length; y++){
-    //   if(killAll[y].hasAttribute('id')){
-    //     killAll[y].classList.remove('zombieOne', 'zombieTwo', 'zombieThree', 'all');
-    //     killAll[y].removeAttribute('id');
-    //     killAll[y].removeEventListener('click', this.killMe);
-    //   }
-    // }
+    this.boardPage.style.display = 'none';
+    this.gameOverPage.style.display = 'flex';
+    this.gameOverPage.classList.add('showing');
   }
 
   this.killMe = () =>{
@@ -194,6 +188,40 @@ let Round = function(){
     }
   }, 1000)
 }
+
+
+let Again = function(){
+  this.round = document.getElementById('round');
+  this.score = document.getElementById('score');
+  this.scoreNumber = this.score.querySelector('span');
+  this.roundNumber = this.round.querySelector('span');
+  this.againButton = document.getElementById('again');
+  this.boardSection = document.getElementById('board');
+  this.gameOverPage = document.getElementById('gameOver');
+  this.start = () =>{
+    i = 0;
+    numOfWalkers = 9;
+    array = [];
+    roundCounter = 1;
+    progress = 100;
+    score = 0;
+    this.roundNumber.innerHTML = roundCounter;
+    this.scoreNumber.innerHTML = score;
+    progressBar.style.width = parseInt(progress)+"%";
+    progressBar.style.backgroundColor = 'green';
+    nextRound.nextButton.style.visibility = 'hidden';
+    this.gameOverPage.style.display = 'none';
+    this.boardSection.style.display = 'flex';
+    this.boardSection.classList.add('showing');
+    let	timeout	=	setTimeout(() =>{
+      let round = new Round();
+    },	4000);
+
+  }
+  this.againButton.addEventListener('click', this.start);
+}
+let again = new Again();
+
 
 let Start = function(){
   this.startButton = document.getElementById('start');
