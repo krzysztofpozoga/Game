@@ -73,7 +73,9 @@ let Game = function(){
   this.randomZombie = Math.round(Math.random() * 2);
   this.boardPage = document.querySelector('#board');
   this.gameOverPage = document.getElementById('gameOver');
-  this.againButton = document.getElementById('again');
+  this.winnerPage = document.getElementById('winner');
+  this.againButton = document.querySelector('#gameOver #again');
+  this.winnerButton = document.querySelector('#winner #again');
   this.board = document.querySelectorAll('#board div');
   this.boardSpot = document.querySelectorAll('.grass');
   this.nextRoundButton = document.getElementById('next');
@@ -131,6 +133,9 @@ let Game = function(){
       if (gameVariables.array.length > gameVariables.numOfWalkers) {
         this.nextRoundButton.style.visibility = 'visible';
       }
+      if (gameVariables.roundCounter === 1 && gameVariables.array.length === gameVariables.numOfWalkers+1) {
+        this.winner();
+      }
     }
   }
 
@@ -155,6 +160,13 @@ let Game = function(){
     this.gameOverPage.style.display = 'flex';
     this.againButton.classList.add('showing');
   }
+  this.winner = () => {
+    if (gameVariables.roundCounter === 15 && gameVariables.array.length === gameVariables.numOfWalkers+1 && gameVariables.progress > 0) {
+      this.boardPage.style.display = 'none';
+      this.winnerPage.style.display = 'flex';
+      this.winnerButton.classList.add('showing');
+    }
+  }
 
   this.killMe = () =>{
     gameVariables.array.push(this.walker);
@@ -176,6 +188,9 @@ let Game = function(){
     }
     gameVariables.score = gameVariables.score +1;
     this.scoreNumber.innerHTML=gameVariables.score;
+    if (gameVariables.roundCounter === 1 && gameVariables.array.length === gameVariables.numOfWalkers+1) {
+      this.winner();
+    }
   }
 
   this.killTheWalker = () =>{
@@ -229,9 +244,11 @@ let Again = function(){
   this.score = document.getElementById('score');
   this.scoreNumber = this.score.querySelector('span');
   this.roundNumber = this.round.querySelector('span');
-  this.againButton = document.getElementById('again');
+  this.againButton = document.querySelector('#gameOver #again');
+  this.winnerButton = document.querySelector('#winner #again');
   this.boardSection = document.getElementById('board');
   this.gameOverPage = document.getElementById('gameOver');
+  this.winnerPage = document.getElementById('winner');
   this.start = () =>{
     gameVariables.i = 0;
     gameVariables.numOfWalkers = 9;
@@ -245,6 +262,7 @@ let Again = function(){
     gameVariables.progressBar.style.backgroundColor = 'green';
     nextRound.nextButton.style.visibility = 'hidden';
     this.gameOverPage.style.display = 'none';
+    this.winnerPage.style.display = 'none';
     this.boardSection.style.display = 'flex';
     this.boardSection.classList.add('showing');
     let	timeout	=	setTimeout(() =>{
@@ -253,5 +271,6 @@ let Again = function(){
 
   }
   this.againButton.addEventListener('click', this.start);
+  this.winnerButton.addEventListener('click', this.start);
 }
 let again = new Again();
