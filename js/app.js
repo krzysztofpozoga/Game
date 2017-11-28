@@ -172,11 +172,13 @@ let Round = function(){
   let seconds = 1000;
   this.round = document.getElementById('round');
   this.score = document.getElementById('score');
+  this.primaryImage = document.getElementById('primaryImage');
   this.scoreNumber = this.score.querySelector('span');
   this.roundNumber = this.round.querySelector('span');
   this.roundNumber.innerHTML = roundCounter;
   this.score.style.display = 'flex';
   this.round.style.display = 'flex';
+  this.primaryImage.style.display = 'flex';
   if (roundCounter === 9 || roundCounter === 10) {
     numOfWalkers = numOfWalkers + 5;
   };
